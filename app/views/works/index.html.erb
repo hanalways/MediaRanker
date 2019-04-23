@@ -1,21 +1,30 @@
-<section class="spotlight">
-  Media Spotlight:
-  <%= @spotlight.title %> by <%= @spotlight.creator %>
-</section>
+<h2>List of Works</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Top Movies</th>
-      <th scope="col">Top Books</th>
-      <th scope="col">Top Albums</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Movie 1</td>
-      <td>Book 1</td>
-      <td>Album 1</td>
-    </tr>
-  </tbody>
-</table>  
+<% @categories.each do |category| %>
+  <h3><%= category.capitalize %>
+  <table class="table <%= category %>
+    <thead>
+      <tr>
+        <th scope="col">Votes</th>
+        <th scope="col">Title</th>
+        <th scope="col">Created By</th>
+        <th scope="col">Published</th>
+        <th scope="col">Upvote</th>
+      </tr>
+    </thead>
+    <% Work.entries(category).each do |work| %>
+    <tbody>
+      <tr>
+        <td>Vote #</td>
+        <td><%= work.title %></td>
+        <td><%= work.creator %></td>
+        <td><%= work.publication_year %></td>
+        <td>
+          Upvote Button
+          <%# button_to "Upvote", new_vote_path(work), method: :post %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+<% end %>
