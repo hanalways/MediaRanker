@@ -10,6 +10,35 @@
   </head>
 
   <body>
+  <header>
+    <h1>
+      <%= link_to "Media Ranker", root_path %>
+    </h1>
+    <sub>Ranking the Best of Everything</sub>
+
+    <nav class="navbar">
+      <ul>
+        <li class="nav-item">
+          View top media
+        </li>
+        <li class="nav-item">
+          View all media
+        </li>
+        <li class="nav-item">
+          Add a new work
+        </li>
+        <li class="nav-item">
+          View all users
+        </li>
+      </ul>
+
+      <a href="#" role="button" class="btn btn-primary">Logged in as hana</a>
+      <a href="#" role="button" class="btn btn-primary">Log Out</a>
+    </nav>
+  </header>
+
+  <section>
     <%= yield %>
+  </section>
   </body>
 </html>
