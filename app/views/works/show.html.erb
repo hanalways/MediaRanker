@@ -20,3 +20,19 @@
   <a href="#" role="button" class="btn btn-danger">Delete</a>
 </section>
 
+<section>
+  <h3>
+    # Votes for this <%= @work.category.capitalize %>
+  </h3>
+  <table class="table">
+    <tr>
+      <th>User</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td>@work.vote.user_id.username</td>
+      <td>@work.vote.updated_at</td>
+    </tr>
+  </table>
+</section>
+

@@ -16,7 +16,7 @@
     <tbody>
       <tr>
         <td>Vote #</td>
-        <td><%= work.title %></td>
+        <td><%= link_to work.title, work_path(work) %></td>
         <td><%= work.creator %></td>
         <td><%= work.publication_year %></td>
         <td>
@@ -28,3 +28,8 @@
     <% end %>
   </table>
 <% end %>
+
+<section class="footer-media">
+  <a href="root_path" role="button" class="btn btn-secondary">View top media</a>
+  <a href="new" role="button" class="btn btn-primary">Add a new work</a>
+</section>
