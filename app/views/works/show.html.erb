@@ -1,0 +1,22 @@
+<section>
+  <h2><%= @work.title %></h2>
+  <ul>
+    <li>
+      Created by: <%= @work.creator %>
+    </li>
+    <li>
+      Published: <%= @work.publication_year %>
+    </li>
+    <li>
+      <%= @work.description %>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <a href="root_path" role="button" class="btn btn-primary">Back to media ranks</a>
+  <a href="#" role="button" class="btn btn-primary">Edit</a>
+  <a href="#" role="button" class="btn btn-primary">Upvote</a>
+  <a href="#" role="button" class="btn btn-danger">Delete</a>
+</section>
+
