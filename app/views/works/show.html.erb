@@ -14,9 +14,9 @@
 </section>
 
 <section>
-  <a href="root_path" role="button" class="btn btn-primary">Back to media ranks</a>
-  <a href="#" role="button" class="btn btn-primary">Edit</a>
-  <a href="#" role="button" class="btn btn-primary">Upvote</a>
+  <%= link_to "Back to media ranks", root_path, class: "btn btn-primary" %>
+  <%= link_to "Edit", edit_work_path(@work), class: "btn btn-primary" %>
+  <%= link_to "Upvote", root_path, class: "btn btn-primary" %>
   <a href="#" role="button" class="btn btn-danger">Delete</a>
 </section>
 
