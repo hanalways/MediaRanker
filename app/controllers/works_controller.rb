@@ -1,12 +1,13 @@
 class WorksController < ApplicationController
+  # update with update and delete
+  before_action :find_work, only: [:show, :edit]
+
   def index
     @works = Work.all
     @categories = ['album', 'book', 'movie']
   end
 
-  def show
-    @work = Work.find_by(id: params[:id])
-  end
+  # Show and Edit are entirely the find_works helper
 
   def new
     @work = Work.new
@@ -32,5 +33,12 @@ class WorksController < ApplicationController
   private
   def work_params
     return params.require(:work).permit(:category, :title, :creator, :publication_year, :description)
+  end
+
+  def find_work 
+    @work = Work.find_by(id: params[:id])
+    unless @work
+      head :not_found
+    end
   end
 end
