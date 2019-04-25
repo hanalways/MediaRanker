@@ -17,24 +17,18 @@
       <sub>Ranking the Best of Everything</sub>
     </h1>
 
-    <nav class="navbar">
-      <ul>
-        <li class="nav-item">
-          View top media
-        </li>
-        <li class="nav-item">
-          View all media
-        </li>
-        <li class="nav-item">
-          Add a new work
-        </li>
-        <li class="nav-item">
-          View all users
-        </li>
-      </ul>
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+          <%= link_to "View top media", root_path, class: "btn btn-link" %>
+          <%= link_to "View all media", works_path, class: "btn btn-link" %>
+          <%= link_to "Add a new work", new_work_path, class: "btn btn-link" %>
+          <%= link_to "View all users", root_path, class: "btn btn-link" %>
+      </form>
 
-      <a href="#" role="button" class="btn btn-primary">Logged in as hana</a>
-      <a href="#" role="button" class="btn btn-primary">Log Out</a>
+      <div class="login">
+        <%=link_to "Login", root_path, class: "btn btn-link" %>
+        <%# BUILD LOGIC FOR LOG IN/LOG OUT %>
+      </div>
     </nav>
   </header>
 
