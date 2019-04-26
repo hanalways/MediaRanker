@@ -5,15 +5,15 @@
 
 <div class="container">
   <div class="row">
-    <%= Work.categories.each do |category| %>
+    <% Work.categories.each do |category| %>
     <div class="col">
       <p class="column head">Top <%= category.capitalize %>s</p>
       <% Work.top_ten(category).each do |category| %>
       <span class="top ten">
           <span class="title">
             <%= category.title %>
-          </span><br>
-          by <%= category.creator %>
+          </span>
+          by <%= category.creator %><br>
           # votes
       </span>
       <% end %>
