@@ -1,13 +1,25 @@
 class WorksController < ApplicationController
   # update with update and delete
-  before_action :find_work, only: [:show, :edit]
+  before_action :find_work, only: [:show, :edit, :update, :destroy]
 
   def index
     @works = Work.all
     @categories = ['album', 'book', 'movie']
   end
 
-  # Show and Edit are entirely the find_works helper
+  def edit
+    unless @work
+      redirect_to works_path
+      flash.now[:status] = :warning
+      flash.now[:message] = "Could not edit for Work ID \##{params[:id]}"
+    end
+  end
+
+  def show 
+    unless @work 
+      redirect_to works_path
+    end
+  end
 
   def new
     @work = Work.new
@@ -22,12 +34,40 @@ class WorksController < ApplicationController
     if successful
       flash[:status] = :success
       flash[:message] = "Successfully saved media with ID #{@work.id}"
-      redirect_to works_path
+      redirect_to work_path(@work.id)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save media"
       render :new, status: :bad_request
     end
+  end
+
+  def update
+    unless @work
+      head :not_found
+      return
+    end
+
+    if @work.update(work_params)
+      flash[:status] = :success
+      flash[:message] = "Successfully updated Work \##{params[:id]}"
+      redirect_to work_path(@work)
+    else
+      flash.now[:status] = :warning
+      flash.now[:message] = "A problem occurred: Could not update Work \##{params[:id]}"
+      render :edit, status: :bad_request 
+    end
+  end
+
+  def destroy 
+    unless @work
+      head :not_found 
+      return 
+    end
+
+    @work.destroy
+    flash[:success] = "Successfully destroyed work \"#{@work.title}\""
+    redirect_to works_path
   end
 
   private
@@ -37,8 +77,5 @@ class WorksController < ApplicationController
 
   def find_work 
     @work = Work.find_by(id: params[:id])
-    unless @work
-      head :not_found
-    end
   end
 end
