@@ -42,17 +42,19 @@ describe WorksController do
           publication_year: 1990,
         },
       }
+      new_work = Work.find_by(title: work_hash[:work][:title])
 
       expect {
         post works_path, params: work_hash
       }.must_change "Work.count", +1
-
-      new_work = Work.find_by(title: work_hash[:work][:title])
-      expect(new_work.creator).must_equal work_hash[:work][:creator]
-      expect(new_work.description).must_equal work_hash[:work][:description]
-
+      
       must_respond_with :redirect
       must_redirect_to work_path(new_work.id)
+
+      check_flash
+
+      expect(new_work.creator).must_equal work_hash[:work][:creator]
+      expect(new_work.description).must_equal work_hash[:work][:description]
     end
   end
 
@@ -88,6 +90,19 @@ describe WorksController do
 
       must_respond_with :redirect
       expect(work.title).must_equal(work_params[:work][:title])
+    end
+  end
+
+  describe "destroy" do 
+    it "removes work from database" do 
+      expect {
+        delete work_path(work)
+      }.must_change "Work.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to works_path
+
+
     end
   end
 end
