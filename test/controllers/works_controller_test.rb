@@ -99,7 +99,7 @@ describe WorksController do
       }
     }
 
-    it "can update data on existing passenger" do 
+    it "can update data on existing work" do 
       work.assign_attributes(work_params[:work])
       expect(work).must_be :valid?
 
@@ -107,6 +107,27 @@ describe WorksController do
 
       must_respond_with :redirect
       expect(work.title).must_equal(work_params[:work][:title])
+
+      check_flash
+    end
+
+    it "responds with NOT FOUND for a fake book" do
+      work_id = Work.last.id + 1
+      patch work_path(work_id), params: work_params
+      must_respond_with :not_found
+    end
+
+    it "responds with BAD REQUEST for bad data" do 
+      work_params[:work][:title] = ""
+
+      work.assign_attributes(work_params[:work])
+      expect(work).wont_be :valid?
+
+      patch work_path(work), params: work_params
+
+      must_respond_with :bad_request 
+
+      check_flash(:warning)
     end
   end
 
@@ -118,8 +139,16 @@ describe WorksController do
 
       must_respond_with :redirect
       must_redirect_to works_path
+    end
 
+    it "returns a 404 if the book does not exist" do 
+      work_id = 123456
 
+      expect(Work.find_by(id: work_id)).must_be_nil
+
+      expect {
+        delete work_path(work_id)
+      }.wont_change "Work.count"
     end
   end
 end

@@ -60,14 +60,14 @@ class WorksController < ApplicationController
   end
 
   def destroy 
-    @work = Work.find_by(id: params[:id])
-
-    if @work.destroy
-      flash[:success] = "Successfully destroyed work \"#{@work.title}\""
-      redirect_to works_path
-    else
-      redirect_back(fallback_location: home_path)
+    unless @work
+      head :not_found 
+      return 
     end
+
+    @work.destroy
+    flash[:success] = "Successfully destroyed work \"#{@work.title}\""
+    redirect_to works_path
   end
 
   private
