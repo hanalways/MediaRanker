@@ -67,4 +67,27 @@ describe WorksController do
       must_redirect_to works_path
     end
   end
+
+  describe "update" do 
+    let(:work_params) {
+      {
+        work: {
+          title: "Enders Game",
+          creator: "Homophobe",
+          description: "good book, crap author",
+          publication_year: "1985",
+        },
+      }
+    }
+
+    it "can update data on existing passenger" do 
+      work.assign_attributes(work_params[:work])
+      expect(work).must_be :valid?
+
+      patch work_path(work), params: work_params 
+
+      must_respond_with :redirect
+      expect(work.title).must_equal(work_params[:work][:title])
+    end
+  end
 end
