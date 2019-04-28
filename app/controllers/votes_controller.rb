@@ -15,7 +15,7 @@ class VotesController < ApplicationController
     else
       flash[:error] = "A problem occured"
 
-      redirect_back(fallback_location: home_path)
+      redirect_back(fallback_location: root_path)
     end
   end
 end
