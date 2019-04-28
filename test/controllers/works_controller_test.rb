@@ -1,6 +1,8 @@
 require "test_helper"
 
 describe WorksController do
+  let (:work) { works(:one) }
+
   describe 'index' do 
     it 'can get to index path' do 
       get works_path
@@ -11,8 +13,6 @@ describe WorksController do
 
   describe 'show' do 
     it 'can get to valid work path' do 
-      work = works(:one)
-
       get work_path(work.id)
       must_respond_with :success
     end
@@ -53,6 +53,13 @@ describe WorksController do
 
       must_respond_with :redirect
       must_redirect_to work_path(new_work.id)
+    end
+  end
+
+  describe "edit" do 
+    it "canget the edit page for an existing work" do 
+      get edit_work_path(work.id)
+      must_respond_with :success
     end
   end
 end
