@@ -8,12 +8,12 @@
     <% Work.categories.each do |category| %>
     <div class="col">
       <p class="column head">Top <%= category.capitalize %>s</p>
-      <% Work.top_ten(category).each do |category| %>
+      <% Work.top_ten(category).each do |work| %>
       <span class="top ten">
           <span class="title">
-            <%= category.title %>
+            <%= link_to work.title, work_path(work), class: "work title" %>
           </span>
-          by <%= category.creator %><br>
+          by <%= work.creator %><br />
           # votes
       </span>
       <% end %>
