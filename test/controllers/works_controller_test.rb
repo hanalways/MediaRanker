@@ -20,7 +20,7 @@ describe WorksController do
     it "will redirect with an invalid work" do
       get work_path(-1)
 
-      must_respond_with :not_found
+      must_respond_with :redirect
     end
   end
 
@@ -60,6 +60,11 @@ describe WorksController do
     it "canget the edit page for an existing work" do 
       get edit_work_path(work.id)
       must_respond_with :success
+    end
+
+    it "will respond with a redirect when attempting to edit a nonexistant path" do 
+      get edit_work_path(-1)
+      must_redirect_to works_path
     end
   end
 end

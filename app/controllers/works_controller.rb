@@ -7,7 +7,19 @@ class WorksController < ApplicationController
     @categories = ['album', 'book', 'movie']
   end
 
-  # Show and Edit are entirely the find_works helper
+  def edit
+    unless @work
+      redirect_to works_path
+      flash.now[:status] = :warning
+      flash.now[:message] = "Could not edit for Work ID \##{params[:id]}"
+    end
+  end
+
+  def show 
+    unless @work 
+      redirect_to works_path
+    end
+  end
 
   def new
     @work = Work.new
@@ -48,8 +60,5 @@ class WorksController < ApplicationController
 
   def find_work 
     @work = Work.find_by(id: params[:id])
-    unless @work
-      head :not_found
-    end
   end
 end
