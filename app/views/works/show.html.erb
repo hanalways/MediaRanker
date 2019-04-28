@@ -33,10 +33,12 @@
       <th>User</th>
       <th>Date</th>
     </tr>
+    <% @work.votes.each do |vote| %>
     <tr>
-      <td>@work.vote.user_id.username</td>
-      <td>@work.vote.updated_at</td>
+      <td><%= User.find_by(id: vote.user_id).username %> </td>
+      <td><%= Vote.get_date(vote) %></td>
     </tr>
+    <% end %>
   </table>
 </section>
 
