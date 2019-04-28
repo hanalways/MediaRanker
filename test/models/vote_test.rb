@@ -32,4 +32,22 @@ describe Vote do
       expect(new_vote.valid?).must_equal false 
     end
   end
+
+  describe "relationships" do 
+    before do 
+      @vote = votes.first
+    end
+
+    it "belongs to a user" do 
+      user = @vote.user
+
+      expect(user).must_be_instance_of User 
+    end
+
+    it "belongs to a work" do 
+      work = @vote.work
+
+      expect(work).must_be_instance_of Work
+    end
+  end
 end
