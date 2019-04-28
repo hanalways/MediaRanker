@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   def create 
     @vote = Vote.new(
       user_id: 1,
-      work_id : params[:work_id]
+      work_id: params[:work_id]
     )
 
     puts "WORK_ID IS: #{@vote.work_id}."

@@ -22,7 +22,7 @@ class WorksController < ApplicationController
     if successful
       flash[:status] = :success
       flash[:message] = "Successfully saved media with ID #{@work.id}"
-      redirect_to works_path
+      redirect_to work_path(@work.id)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save media"
