@@ -14,7 +14,7 @@
             <%= link_to work.title, work_path(work), class: "work title" %>
           </span>
           by <%= work.creator %><br />
-          # votes
+          <%= Work.get_num_votes(work) %> votes
       </span>
       <% end %>
     </div>

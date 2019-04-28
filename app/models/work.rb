@@ -16,4 +16,8 @@ class Work < ApplicationRecord
   def self.top_ten(category)
     return entries(category)[0..9]
   end
+
+  def self.get_num_votes(work)
+    return work.votes.count
+  end
 end

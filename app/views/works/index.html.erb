@@ -20,8 +20,7 @@
         <td><%= work.creator %></td>
         <td><%= work.publication_year %></td>
         <td>
-          Upvote Button
-          <%# button_to "Upvote", new_vote_path(work), method: :post %>
+          <%= button_to "Upvote", new_vote_path(work), method: :post %>
         </td>
       </tr>
     </tbody>
