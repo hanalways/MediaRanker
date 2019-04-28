@@ -42,12 +42,12 @@ describe WorksController do
           publication_year: 1990,
         },
       }
-      new_work = Work.find_by(title: work_hash[:work][:title])
-
+      
       expect {
         post works_path, params: work_hash
       }.must_change "Work.count", +1
       
+      new_work = Work.find_by(title: work_hash[:work][:title])
       must_respond_with :redirect
       must_redirect_to work_path(new_work.id)
 
@@ -55,6 +55,23 @@ describe WorksController do
 
       expect(new_work.creator).must_equal work_hash[:work][:creator]
       expect(new_work.description).must_equal work_hash[:work][:description]
+    end
+
+    it "sends back bad_request if no work data is sent" do
+      work_data = {
+        work: {
+          title: "",
+        },
+      }
+      expect(Work.new(work_data[:work])).wont_be :valid?
+
+      expect {
+        post works_path, params: work_data
+      }.wont_change "Work.count"
+
+      must_respond_with :bad_request
+
+      check_flash(:error)
     end
   end
 
