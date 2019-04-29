@@ -2,6 +2,10 @@ require "test_helper"
 require 'pry'
 
 describe Work do
+  let(:vote1) { votes(:one) }
+  let(:vote2) { votes(:two) }
+  let(:work) { works(:one) }
+
   describe "validations" do 
     before do 
       @work = Work.new(
@@ -63,10 +67,10 @@ describe Work do
     end
   end
 
-  describe "entries method" do
-    it "returns an array" do
-
+  describe "relationships" do 
+    it "has many votes" do 
+      work.votes << vote1
+      expect(work.votes.first).must_equal vote1
     end
   end
-
 end
