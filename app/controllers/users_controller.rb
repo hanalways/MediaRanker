@@ -16,17 +16,19 @@ class UsersController < ApplicationController
 
   def login 
     username = params[:user][:username]
-
     user = User.find_by(username: username)
-    unless user
+
+    if user 
+      session[:user_id] = user.id
+      flash[:status] = :success
+      flash[:message] = "Successfully logged in as an existing user #{user.username}"
+    else 
       user = User.create(username: username)
+      session[:user_id] = user.id 
+      flash[:status] = :success
+      flash[:message] = "Successfully logged in as a new user #{user.username}"
     end
-
-    session[:user_id] = user.id 
-
-    flash[:status] = :success
-    flash[:message] = "Successfully logged in as user #{user.username}"
-
+    
     redirect_to root_path
   end
 
