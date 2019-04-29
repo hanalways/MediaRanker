@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "homepage#index"
+  get "/", to: "homepages#index"
+  
   resources :works, :users, :votes
 
   get "/login", to: "users#login_form", as: "login"
