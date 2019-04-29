@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   # update with update and delete
-  before_action :find_work, only: [:show, :edit, :update, :destroy]
+  before_action :find_work, only: [:show, :edit, :update, :destroy, :vote]
 
   def index
     @works = Work.all
@@ -67,6 +67,24 @@ class WorksController < ApplicationController
 
     @work.destroy
     flash[:success] = "Successfully destroyed work \"#{@work.title}\""
+    redirect_to works_path
+  end
+
+  def vote
+    if session[:user_id]
+      voter_id = session[:user_id]
+      vote = Vote.new(user_id: voter_id, work_id: @work.id)
+      successful = vote.save
+
+      if successful 
+        flash[:success] = "Successfully upvoted!"
+      else
+        flash[:error] = "A problem occurred: Could not upvote"
+      end
+    else
+      flash[:error] = "A problem occured: You must log in to do that"
+    end
+
     redirect_to works_path
   end
 
