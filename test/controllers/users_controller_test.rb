@@ -50,4 +50,15 @@ describe UsersController do
       must_respond_with :success 
     end
   end
+
+  describe "logout" do 
+    it "sets session id to nil" do 
+      user = perform_login 
+      expect(session[:user_id]).must_equal user.id 
+
+      post logout_path
+      expect(session[:user_id]).must_be_nil
+      expect(flash[:success]).must_equal "Successfully logged out"
+    end
+  end
 end
