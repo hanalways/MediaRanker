@@ -43,13 +43,13 @@ describe UsersController do
     end
   end
 
-  describe "current" do 
-    it "will respond with success if a user is logged in" do 
-      perform_login
-      get current_user_path
-      must_respond_with :success 
-    end
-  end
+  # describe "current" do 
+  #   it "will respond with success if a user is logged in" do 
+  #     perform_login
+  #     get current_user_path
+  #     must_respond_with :success 
+  #   end
+  # end
 
   describe "logout" do 
     it "sets session id to nil" do 

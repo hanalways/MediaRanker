@@ -131,24 +131,24 @@ describe WorksController do
     end
   end
 
-  describe "destroy" do 
-    it "removes work from database" do 
-      expect {
-        delete work_path(work)
-      }.must_change "Work.count", -1
+  # describe "destroy" do 
+  #   it "removes work from database" do 
+  #     expect {
+  #       delete work_path(work)
+  #     }.must_change "Work.count", -1
 
-      must_respond_with :redirect
-      must_redirect_to works_path
-    end
+  #     must_respond_with :redirect
+  #     must_redirect_to works_path
+  #   end
 
-    it "returns a 404 if the book does not exist" do 
-      work_id = 123456
+  #   it "returns a 404 if the book does not exist" do 
+  #     work_id = 123456
 
-      expect(Work.find_by(id: work_id)).must_be_nil
+  #     expect(Work.find_by(id: work_id)).must_be_nil
 
-      expect {
-        delete work_path(work_id)
-      }.wont_change "Work.count"
-    end
-  end
+  #     expect {
+  #       delete work_path(work_id)
+  #     }.wont_change "Work.count"
+  #   end
+  # end
 end
