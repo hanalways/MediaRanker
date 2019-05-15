@@ -1,5 +1,4 @@
 class WorksController < ApplicationController
-  # update with update and delete
   before_action :find_work, only: [:show, :edit, :update, :destroy, :vote]
 
   def index
