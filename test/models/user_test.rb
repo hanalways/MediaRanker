@@ -29,14 +29,14 @@ describe User do
     end 
   end
 
-  describe "relationships" do 
-    it "can add a vote through votes" do 
-      skip
-      vote = votes.first 
-      @user.votes << vote
+  # describe "relationships" do 
+  #   it "can add a vote through votes" do 
+  #     skip
+  #     vote = votes.first 
+  #     @user.votes << vote
 
-      expect(@user.votes).must_include vote
-      expect(vote.user_id).must_equal user.id
-    end
-  end
+  #     expect(@user.votes).must_include vote
+  #     expect(vote.user_id).must_equal user.id
+  #   end
+  # end
 end
